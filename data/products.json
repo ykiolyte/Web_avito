@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "Смартфон XYZ",
+        "price": 15000,
+        "image": "/images/smartphone.jpg",
+        "description": "Современный смартфон с отличной камерой.",
+        "dateAdded": "2023-10-01"
+    },
+    {
+        "id": 2,
+        "title": "Ноутбук ABC",
+        "price": 45000,
+        "image": "/images/laptop.jpg",
+        "description": "Мощный ноутбук для работы и игр.",
+        "dateAdded": "2023-09-15"
+    },
+    {
+        "id": 3,
+        "title": "Наушники DEF",
+        "price": 3000,
+        "image": "/images/headphones.jpg",
+        "description": "Беспроводные наушники с шумоподавлением.",
+        "dateAdded": "2023-10-05"
+    }
+]

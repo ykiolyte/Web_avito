@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой профиль</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Мой профиль</h1>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/add-ad">Добавить объявление</a>
+            <a href="/logout">Выйти</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-info">
+            <h2>Информация о пользователе</h2>
+            <img id="avatar" src="/avatars/default.png" alt="Аватар" width="150"><br><br>
+            <form action="/upload-avatar" method="POST" enctype="multipart/form-data">
+                <input type="file" name="avatar" accept="image/*" required><br><br>
+                <button type="submit">Загрузить аватар</button>
+            </form><br>
+
+            <form action="/profile" method="POST">
+                <label>Имя пользователя: <strong id="username"></strong></label><br><br>
+
+                <label for="first_name">Имя:</label><br>
+                <input type="text" id="first_name" name="first_name"><br><br>
+
+                <label for="last_name">Фамилия:</label><br>
+                <input type="text" id="last_name" name="last_name"><br><br>
+
+                <label for="phone">Номер телефона:</label><br>
+                <input type="tel" id="phone" name="phone"><br><br>
+
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="/profile.js"></script>
+</body>
+</html>

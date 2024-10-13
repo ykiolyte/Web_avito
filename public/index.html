@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой магазин товаров</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Мой магазин товаров</h1>
+        <nav>
+            <a href="/add-ad">Добавить объявление</a>
+            <a href="/profile">Мой профиль</a>
+            <a href="/logout">Выйти</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Блок фильтров -->
+        <section class="filters">
+            <h2>Фильтры</h2>
+            <form id="filter-form">
+                <label for="price-min">Цена от:</label>
+                <input type="number" id="price-min" name="priceMin" min="0">
+        
+                <label for="price-max">до:</label>
+                <input type="number" id="price-max" name="priceMax" min="0">
+        
+                <label for="sort-by">Сортировать по:</label>
+                <select id="sort-by" name="sortBy">
+                    <option value="none">Без сортировки</option>
+                    <option value="price-asc">Цена (по возрастанию)</option>
+                    <option value="price-desc">Цена (по убыванию)</option>
+                    <option value="date-desc">Новизна (сначала новые)</option>
+                    <option value="date-asc">Новизна (сначала старые)</option>
+                </select>
+        
+                <button type="submit">Применить</button>
+            </form>
+        </section>
+
+        <!-- Список товаров -->
+        <div class="product-list"></div>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>

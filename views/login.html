@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <!-- Подключаем стили -->
+    <link rel="stylesheet" href="/styles.css">
+<body>
+    <!-- Обёртка для центрирования контента -->
+    <div class="container">
+        <div class="form-container">
+            <p class="title">Вход</p>
+            <!-- Обновляем форму -->
+            <form class="form" action="/login" method="POST">
+                <div class="input-group">
+                    <label for="username">Имя пользователя</label>
+                    <input type="text" name="username" id="username" placeholder="" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" name="password" id="password" placeholder="" required>
+                    <div class="forgot">
+                        <a href="#">Забыли пароль?</a>
+                    </div>
+                </div>
+                <button class="sign" type="submit">Войти</button>
+            </form>
+            <div class="social-message">
+                <div class="line"></div>
+                <p class="message">Войти с помощью соцсетей</p>
+                <div class="line"></div>
+            </div>
+            <div class="social-icons">
+                <button aria-label="Log in with Google" class="icon">
+                    <!-- SVG для Google -->
+                    <!-- Ваш SVG-код -->
+                </button>
+                <button aria-label="Log in with Twitter" class="icon">
+                    <!-- SVG для Twitter -->
+                    <!-- Ваш SVG-код -->
+                </button>
+                <button aria-label="Log in with GitHub" class="icon">
+                    <!-- SVG для GitHub -->
+                    <!-- Ваш SVG-код -->
+                </button>
+            </div>
+            <p class="signup">Нет аккаунта?
+                <a href="/register" class="">Зарегистрироваться</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
