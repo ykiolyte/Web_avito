@@ -2,14 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title id="product-title">Товар</title>
+    <title>Профиль продавца</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <!-- Обернём весь контент в контейнер -->
     <div class="container">
         <header>
-            <h1 id="product-title">Товар</h1>
+            <h1 id="seller-name">Профиль продавца</h1>
             <nav>
                 <a href="/">Главная</a>
                 <a href="/profile">Мой профиль</a>
@@ -18,36 +17,22 @@
         </header>
 
         <main>
-            <div class="product-detail">
-                <!-- Карусель изображений -->
-                <div class="product-carousel">
-                    <button class="carousel-button prev-button">&#10094;</button>
-                    <img id="carousel-image" src="" alt="Фото товара">
-                    <button class="carousel-button next-button">&#10095;</button>
-                </div>
-
-                <!-- Информация о товаре -->
-                <div class="product-info">
-                    <h2 id="product-price"></h2>
-                    <p id="product-description"></p>
-                    <h3>Продавец</h3>
-                    <!-- Имя продавца со ссылкой на страницу продавца -->
-                    <p id="seller-name"></p>
-                    <p id="seller-phone"></p>
-                    <p id="seller-email"></p>
-                </div>
+            <!-- Информация о продавце -->
+            <div class="seller-info">
+                <p id="seller-email"></p>
+                <p id="seller-phone"></p>
             </div>
 
             <!-- Блок отзывов -->
             <div class="reviews-container">
-                <h2>Отзывы о товаре</h2>
+                <h2>Отзывы о продавце</h2>
                 <div id="reviews-list">
                     <!-- Здесь будут отображаться отзывы -->
                 </div>
 
                 <!-- Форма добавления отзыва -->
                 <div class="review-form-container">
-                    <h3>Оставить отзыв</h3>
+                    <h3>Оставить отзыв о продавце</h3>
                     <form id="review-form">
                         <label for="review-rating">Оценка:</label>
                         <select id="review-rating" name="rating" required>
@@ -68,6 +53,6 @@
         </main>
     </div>
 
-    <script src="/product.js"></script>
+    <script src="/seller.js"></script>
 </body>
 </html>

@@ -44,6 +44,30 @@ db.run(`CREATE TABLE IF NOT EXISTS ad_images (
     FOREIGN KEY(ad_id) REFERENCES ads(id)
 )`);
 
+// Создание таблицы отзывов, если её нет
+db.run(`CREATE TABLE IF NOT EXISTS reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER,
+    user_id INTEGER,
+    rating INTEGER,
+    text TEXT,
+    date_posted DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(product_id) REFERENCES ads(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+)`);
+
+// Создание таблицы отзывов о продавцах, если её нет
+db.run(`CREATE TABLE IF NOT EXISTS seller_reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    seller_id INTEGER,
+    user_id INTEGER,
+    rating INTEGER,
+    text TEXT,
+    date_posted DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(seller_id) REFERENCES users(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+)`);
+
 // Настройка сессий
 app.use(session({
     store: new SQLiteStore(),
@@ -220,6 +244,93 @@ app.get('/profile', (req, res) => {
 // Страница товара
 app.get('/product/:id', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'product.html'));
+});
+
+// Получение отзывов для товара
+app.get('/api/product/:id/reviews', (req, res) => {
+    const productId = req.params.id;
+
+    db.all(`SELECT reviews.*, users.username FROM reviews JOIN users ON reviews.user_id = users.id WHERE product_id = ? ORDER BY date_posted DESC`, [productId], (err, reviews) => {
+        if (err) {
+            console.error(err);
+            res.json([]);
+        } else {
+            res.json(reviews);
+        }
+    });
+});
+
+// Добавление отзыва к товару
+app.post('/api/product/:id/reviews', (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).send('Необходимо авторизоваться для оставления отзыва.');
+    }
+
+    const productId = req.params.id;
+    const { rating, text } = req.body;
+    const userId = req.session.userId;
+
+    db.run(`INSERT INTO reviews (product_id, user_id, rating, text) VALUES (?, ?, ?, ?)`, [productId, userId, rating, text], function(err) {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Ошибка при добавлении отзыва.');
+        } else {
+            res.status(200).send('Отзыв успешно добавлен.');
+        }
+    });
+});
+
+// Страница продавца
+app.get('/seller', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'seller.html'));
+});
+
+// API для получения информации о продавце
+app.get('/api/seller/:id', (req, res) => {
+    const sellerId = req.params.id;
+
+    db.get(`SELECT username, email, phone FROM users WHERE id = ?`, [sellerId], (err, seller) => {
+        if (err) {
+            console.error(err);
+            res.json({});
+        } else {
+            res.json(seller);
+        }
+    });
+});
+
+// Получение отзывов о продавце
+app.get('/api/seller/:id/reviews', (req, res) => {
+    const sellerId = req.params.id;
+
+    db.all(`SELECT seller_reviews.*, users.username FROM seller_reviews JOIN users ON seller_reviews.user_id = users.id WHERE seller_id = ? ORDER BY date_posted DESC`, [sellerId], (err, reviews) => {
+        if (err) {
+            console.error(err);
+            res.json([]);
+        } else {
+            res.json(reviews);
+        }
+    });
+});
+
+// Добавление отзыва о продавце
+app.post('/api/seller/:id/reviews', (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).send('Необходимо авторизоваться для оставления отзыва.');
+    }
+
+    const sellerId = req.params.id;
+    const { rating, text } = req.body;
+    const userId = req.session.userId;
+
+    db.run(`INSERT INTO seller_reviews (seller_id, user_id, rating, text) VALUES (?, ?, ?, ?)`, [sellerId, userId, rating, text], function(err) {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Ошибка при добавлении отзыва.');
+        } else {
+            res.status(200).send('Отзыв успешно добавлен.');
+        }
+    });
 });
 
 // API для получения данных товара по ID

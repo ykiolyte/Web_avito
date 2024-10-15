@@ -1,3 +1,5 @@
+// public/app.js
+
 // Глобальная переменная для хранения загруженных объявлений
 let allProducts = [];
 
@@ -26,17 +28,22 @@ function displayProducts(products) {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
 
-         // Добавляем событие клика для перехода на страницу товара
-         productCard.addEventListener('click', () => {
+        // Добавляем событие клика для перехода на страницу товара
+        productCard.addEventListener('click', () => {
             window.location.href = `/product/${product.id}`;
         });
 
         // Добавляем изображение объявления
         if (product.image) {
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add('product-image-container');
+
             const productImage = document.createElement('img');
             productImage.src = product.image;
             productImage.alt = product.title;
-            productCard.appendChild(productImage);
+
+            imageContainer.appendChild(productImage);
+            productCard.appendChild(imageContainer);
         }
 
         // Контейнер с информацией о объявлении
